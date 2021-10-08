@@ -11,6 +11,7 @@
 //Register Reuse part 1
 void dgemm0(const double* A, const double* B, double* C, const int n)
 {
+    int i, j, k;
     for (i=0; i<n; i++)
         for (j=0; j<n; j++)
             for (k=0; k<n; k++)
@@ -19,6 +20,7 @@ void dgemm0(const double* A, const double* B, double* C, const int n)
 
 void dgemm1(const double *A, const double *B, double *C, const int n) 
 {
+    int i, j, k;
     for (i=0; i<n; i++)
         for (j=0; j<n; j++) {
             register double r = C[i*n+j] ;
@@ -146,6 +148,7 @@ void dgemm3(const double *A, const double *B, double *C, const int n)
 //Cache Reuse part 3
 void ijk(const double *A, const double *B, double *C, const int n) 
 {
+    int i, j, k;
     for (i=0; i<n; i++)  {
         for (j=0; j<n; j++) {
             sum = 0.0;
@@ -173,6 +176,7 @@ void bijk(const double *A, const double *B, double *C, const int n, const int b)
 
 void jik(const double *A, const double *B, double *C, const int n) 
 {
+    int i, j, k;
     for (j=0; j<n; j++) {
         for (i=0; i<n; i++) {
             sum = 0.0;
@@ -199,6 +203,7 @@ void bjik(const double *A, const double *B, double *C, const int n, const int b)
 
 void kij(const double *A, const double *B, double *C, const int n) 
 {
+    int i, j, k;
     for (k=0; k<n; k++) {
         for (i=0; i<n; i++) {
             r = A[i][k];
@@ -227,6 +232,7 @@ void bkij(const double *A, const double *B, double *C, const int n, const int b)
 
 void ikj(const double *A, const double *B, double *C, const int n) 
 {
+    int i, j, k;
     for (i=0; i<n; i++) {
         for (k=0; k<n; k++) {
             r = A[i][k];
@@ -254,6 +260,7 @@ void bikj(const double *A, const double *B, double *C, const int n, const int b)
 
 void jki(const double *A, const double *B, double *C, const int n) 
 {
+    int i, j, k;
     for (j=0; j<n; j++) {
         for (k=0; k<n; k++) {
             r = B[k][j];
@@ -281,6 +288,7 @@ void bjki(const double *A, const double *B, double *C, const int n, const int b)
 
 void kji(const double *A, const double *B, double *C, const int n) 
 {
+    int i, j, k;
     for (k=0; k<n; k++) {
         for (j=0; j<n; j++) {
             r = B[k][j];
@@ -310,11 +318,12 @@ void bkji(const double *A, const double *B, double *C, const int n, const int b)
 //Cache Reuse part 4
 void optimal(const double* A, const double* B, double *C, const int n, const int b)
 {
+    int i, j, k;
     for (j=0; j<n; j++) {
         for (k=0; k<n; k++) {
             r = b[k][j];
             for (i=0; i<n; i++)
-                c[i][j] += a[i][k] * r;
-        }
-    }
+            c[i][j] += a[i][k] * r;
+            }
+            }
 }
