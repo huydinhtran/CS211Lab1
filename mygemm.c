@@ -182,8 +182,8 @@ void jik(const double *A, const double *B, double *C, const int n)
         for (i=0; i<n; i++) {
             double sum = 0.0;
             for (k=0; k<n; k++)
-                sum += A[i][k] * B[k][j];
-            C[i][j] = sum
+                sum += A[i*n+k] * B[k*n+j];
+            C[i*n+j] = sum
         }
     }
 }
@@ -207,9 +207,9 @@ void kij(const double *A, const double *B, double *C, const int n)
     int i, j, k;
     for (k=0; k<n; k++) {
         for (i=0; i<n; i++) {
-            double r = A[i][k];
+            double r = A[i*n+k];
             for (j=0; j<n; j++)
-                C[i][j] += r * B[k][j];   
+                C[i*n+j] += r * B[k*n+j];   
         }
     }
 }
@@ -236,9 +236,9 @@ void ikj(const double *A, const double *B, double *C, const int n)
     int i, j, k;
     for (i=0; i<n; i++) {
         for (k=0; k<n; k++) {
-            double r = A[i][k];
+            double r = A[i*n+k];
             for (j=0; j<n; j++)
-                C[i][j] += r * B[k][j];
+                C[i*n+j] += r * B[k*n+j];
         }
     }
 }
@@ -264,9 +264,9 @@ void jki(const double *A, const double *B, double *C, const int n)
     int i, j, k;
     for (j=0; j<n; j++) {
         for (k=0; k<n; k++) {
-            double r = B[k][j];
+            double r = B[k*n+j];
             for (i=0; i<n; i++)
-                C[i][j] += A[i][k] * r;
+                C[i*n+j] += A[i*n+k] * r;
         }
     }
 }
@@ -292,9 +292,9 @@ void kji(const double *A, const double *B, double *C, const int n)
     int i, j, k;
     for (k=0; k<n; k++) {
         for (j=0; j<n; j++) {
-            double r = B[k][j];
+            double r = B[k*n+j];
             for (i=0; i<n; i++)
-                C[i][j] += A[i][k] * r;
+                C[i*n+j] += A[i*n+k] * r;
         }
     }
 }
@@ -322,9 +322,9 @@ void optimal(const double* A, const double* B, double *C, const int n, const int
     int i, j, k;
     for (j=0; j<n; j++) {
         for (k=0; k<n; k++) {
-            double r = B[k][j];
+            double r = B[k*n+j];
             for (i=0; i<n; i++)
-            C[i][j] += A[i][k] * r;
+            C[i*n+j] += A[i*n+k] * r;
             }
             }
 }
