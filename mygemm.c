@@ -57,15 +57,15 @@ void dgemm3(const double *A, const double *B, double *C, const int n)
             register int t = i*n+j; // COLUMN 0 ROW 0
             register int tt = t+n; // COLUMN 0 ROW 1
             register int ttt = tt+n; // COLUMN 0 ROW 2
-            register double rc00 = C4[t];
-            register double rc01 = C4[t+1];
-            register double rc02 = C4[t+2];
-            register double rc10 = C4[tt];
-            register double rc11 = C4[tt+1];
-            register double rc12 = C4[tt+2];
-            register double rc20 = C4[ttt];
-            register double rc21 = C4[ttt+1];
-            register double rc22 = C4[ttt+2];
+            register double rc00 = C[t];
+            register double rc01 = C[t+1];
+            register double rc02 = C[t+2];
+            register double rc10 = C[tt];
+            register double rc11 = C[tt+1];
+            register double rc12 = C[tt+2];
+            register double rc20 = C[ttt];
+            register double rc21 = C[ttt+1];
+            register double rc22 = C[ttt+2];
             for (k = 0; k < n; k += 3) {
                 register int ta = i*n+k;
                 register int tta = ta+n;
@@ -132,15 +132,15 @@ void dgemm3(const double *A, const double *B, double *C, const int n)
                 rc21 += R3 * R5;
                 rc22 += R3 * R6;
                 }
-                C4[t] = rc00;
-                C4[t+1] = rc01;
-                C4[t+2] = rc02;
-                C4[tt] = rc10;
-                C4[tt+1] = rc11;
-                C4[tt+2] = rc12;
-                C4[ttt] = rc20;
-                C4[ttt+1] = rc21;
-                C4[ttt+2] = rc22;
+                C[t] = rc00;
+                C[t+1] = rc01;
+                C[t+2] = rc02;
+                C[tt] = rc10;
+                C[tt+1] = rc11;
+                C[tt+2] = rc12;
+                C[ttt] = rc20;
+                C[ttt+1] = rc21;
+                C[ttt+2] = rc22;
                 }
                 }
 }
@@ -152,7 +152,7 @@ void ijk(const double *A, const double *B, double *C, const int n)
     int i, j, k;
     for (i=0; i<n; i++)  {
         for (j=0; j<n; j++) {
-            double sum[][] = C[i][j];
+            double sum = C[i][j];
             for (k=0; k<n; k++) 
                 sum += A[i][k] * B[k][j];
             C[i][j] = sum;
