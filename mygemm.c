@@ -183,7 +183,7 @@ void jik(const double *A, const double *B, double *C, const int n)
             double sum = 0.0;
             for (k=0; k<n; k++)
                 sum += A[i*n+k] * B[k*n+j];
-            C[i*n+j] = sum
+            C[i*n+j] = sum;
         }
     }
 }
