@@ -147,20 +147,20 @@ void dgemm3(const double *A, const double *B, double *C, const int n)
 //Register Reuse part 3 End
 
 //Cache Reuse part 3
-void ijk(const double *A, const double *B, double **C, const int n) 
+void ijk(const double *A, const double *B, double *C, const int n) 
 {
     int i, j, k;
     for (i=0; i<n; i++)  {
         for (j=0; j<n; j++) {
-            double sum = C[i][j];
+            double sum = C[i*n+j];
             for (k=0; k<n; k++) 
-                sum += A[i][k] * B[k][j];
-            C[i][j] = sum;
+                sum += A[i*n+k] * B[k*n+j];
+            C[i*n+j] = sum;
         }
     } 
 }
 
-void bijk(const double *A, const double *B, double **C, const int n, const int b) 
+void bijk(const double *A, const double *B, double *C, const int n, const int b) 
 {
     /* Multiply n x n matrices a and b  */
     int i, j, k, i1, j1, k1;
@@ -175,7 +175,7 @@ void bijk(const double *A, const double *B, double **C, const int n, const int b
 }
 
 
-void jik(const double *A, const double *B, double **C, const int n) 
+void jik(const double *A, const double *B, double *C, const int n) 
 {
     int i, j, k;
     for (j=0; j<n; j++) {
@@ -188,7 +188,7 @@ void jik(const double *A, const double *B, double **C, const int n)
     }
 }
 
-void bjik(const double *A, const double *B, double **C, const int n, const int b) 
+void bjik(const double *A, const double *B, double *C, const int n, const int b) 
 {
     /* Multiply n x n matrices a and b  */
     int i, j, k, i1, j1, k1;
@@ -202,7 +202,7 @@ void bjik(const double *A, const double *B, double **C, const int n, const int b
                             C[i1*n+j1] += C[i1*n + k1]*C[k1*n + j1];
 }
 
-void kij(const double *A, const double *B, double **C, const int n) 
+void kij(const double *A, const double *B, double *C, const int n) 
 {
     int i, j, k;
     for (k=0; k<n; k++) {
@@ -214,7 +214,7 @@ void kij(const double *A, const double *B, double **C, const int n)
     }
 }
 
-void bkij(const double *A, const double *B, double **C, const int n, const int b) 
+void bkij(const double *A, const double *B, double *C, const int n, const int b) 
 {
     /* Multiply n x n matrices a and b  */
     int i, j, k, i1, j1, k1;
@@ -231,7 +231,7 @@ void bkij(const double *A, const double *B, double **C, const int n, const int b
 }
 
 
-void ikj(const double *A, const double *B, double **C, const int n) 
+void ikj(const double *A, const double *B, double *C, const int n) 
 {
     int i, j, k;
     for (i=0; i<n; i++) {
@@ -243,7 +243,7 @@ void ikj(const double *A, const double *B, double **C, const int n)
     }
 }
 
-void bikj(const double *A, const double *B, double **C, const int n, const int b) 
+void bikj(const double *A, const double *B, double *C, const int n, const int b) 
 {
     /* Multiply n x n matrices a and b  */
     int i, j, k, i1, j1, k1;
@@ -259,7 +259,7 @@ void bikj(const double *A, const double *B, double **C, const int n, const int b
                             }      
 }
 
-void jki(const double *A, const double *B, double **C, const int n) 
+void jki(const double *A, const double *B, double *C, const int n) 
 {
     int i, j, k;
     for (j=0; j<n; j++) {
@@ -271,7 +271,7 @@ void jki(const double *A, const double *B, double **C, const int n)
     }
 }
 
-void bjki(const double *A, const double *B, double **C, const int n, const int b) 
+void bjki(const double *A, const double *B, double *C, const int n, const int b) 
 {
     /* Multiply n x n matrices a and b  */
     int i, j, k, i1, j1, k1;
@@ -287,7 +287,7 @@ void bjki(const double *A, const double *B, double **C, const int n, const int b
                             } 
 }
 
-void kji(const double *A, const double *B, double **C, const int n) 
+void kji(const double *A, const double *B, double *C, const int n) 
 {
     int i, j, k;
     for (k=0; k<n; k++) {
@@ -299,7 +299,7 @@ void kji(const double *A, const double *B, double **C, const int n)
     }
 }
 
-void bkji(const double *A, const double *B, double **C, const int n, const int b) 
+void bkji(const double *A, const double *B, double *C, const int n, const int b) 
 {
     /* Multiply n x n matrices a and b  */
     int i, j, k, i1, j1, k1;
@@ -317,7 +317,7 @@ void bkji(const double *A, const double *B, double **C, const int n, const int b
 //Cache Reuse part 3 End 
 
 //Cache Reuse part 4
-void optimal(const double* A, const double* B, double **C, const int n, const int b)
+void optimal(const double* A, const double* B, double *C, const int n, const int b)
 {
     int i, j, k;
     for (j=0; j<n; j++) {
