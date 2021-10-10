@@ -322,9 +322,9 @@ void optimal(const double* A, const double* B, double *C, const int n, const int
     int i, j, k;
     for (i=0; i<n; i++)
         for (j=0; j<n; j++) {
-            register double r=c[i*n+j];
+            register double r=C[i*n+j];
             for (k=0; k<n; k++)
-                r += a[i*n+k] * b[k*n+j];
-            c[i*n+j]=r;
+                r += A[i*n+k] * A[k*n+j];
+            C[i*n+j]=r;
         }
 }
