@@ -150,7 +150,7 @@ void bjik(const double *A, const double *B, double *C, const int n, const int b)
 
 void kij(const double *A, const double *B, double *C, const int n) 
 {
-
+}
 
 void bkij(const double *A, const double *B, double *C, const int n, const int b) 
 {
