@@ -51,7 +51,16 @@ void ijk(const double *A, const double *B, double *C, const int n)
 
 void bijk(const double *A, const double *B, double *C, const int n, const int b) 
 {
-
+    /* Multiply n x n matrices a and b  */
+    int i, j, k, i1, j1, k1;
+    for (i = 0; i < n; i+=b)
+        for (j = 0; j < n; j+=b)
+            for (k = 0; k < n; k+=b)
+             /* B x B mini matrix multiplications */
+                for (i1 = i; i1 < i+b; i++)
+                    for (j1 = j; j1 < j+b; j++)
+                        for (k1 = k; k1 < k+b; k++)
+                            C[i1*n+j1] += A[i1*n + k1]*B[k1*n + j1];
 }
 
 
