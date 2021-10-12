@@ -22,8 +22,8 @@ int main(int argc, char *argv[])
     int i, j;
     int b;
 
-    int matrix_dim = 2040;
-    int block_size= 60;
+    int matrix_dim = 2048;
+    int block_size= 128;
     double t0, t1, elapsed_time, MKL_elapsed_time;
     double *A = (double *)malloc(sizeof(double) * matrix_dim * matrix_dim);
     double *B = (double *)malloc(sizeof(double) * matrix_dim * matrix_dim);
